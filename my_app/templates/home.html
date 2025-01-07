@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="text-xl font-semibold">Food Items</h2>
+    <ul>
+        {% for food in foods %}
+        <li class="flex justify-between p-2 border-b">
+            {{ food.name }} - {{ food.calorie_count }} kcal
+            <a href="{% url 'remove_food' food.id %}" class="text-red-500">Remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="mb-4">
+    <p>Total Calories: {{ total_calories }} kcal</p>
+    <a href="{% url 'reset_calories' %}" class="text-blue-500">Reset Calories</a>
+</div>
+
+<a href="{% url 'add_food' %}" class="bg-blue-500 text-white p-2 rounded">Add Food</a>
+{% endblock %}
