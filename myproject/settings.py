@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-c81&ohpnjdxiziew&q65*!fj&!m16-yp$ecpunrj!ivkuuhopj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,18 +75,19 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  
-        'USER': 'calorieuser',  
-        'PASSWORD': 'maina05',  
-        'HOST': 'localhost',  
-        'PORT': '5432', 
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  
+#         'USER': 'calorieuser',  
+#         'PASSWORD': 'maina05',  
+#         'HOST': 'localhost',  
+#         'PORT': '5432', 
+#     }
+# }
+DATABASES={
+    'default':dj_database_url.parse("postgresql://testcalorie_user:Yb1J39EN4x8DqUovbTb4cCfsrHBkOkxo@dpg-ctum4trqf0us73f65st0-a.oregon-postgres.render.com/testcalorie")
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -121,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES__DIRS =[BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

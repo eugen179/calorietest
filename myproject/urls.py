@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  # Include is required for app URLs
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin interface
     path('', include('my_app.urls')),  # Includes URLs from your app
 ]
-
+urlpatterns += staticfiles_urlpatterns()
