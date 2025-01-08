@@ -22,10 +22,14 @@ class DailyCalorieRecord(models.Model):
     def __str__(self):
         return f"Record for {self.date}"
 
+
 @receiver(post_save, sender=Food)
 def update_daily_record(sender, instance, created, **kwargs):
     if created:
+        today = timezone.now().date()
+
+        record, _ = DailyCalorieRecord.objects.get_or_create(date=today)
+
         
-        record, _ = DailyCalorieRecord.objects.get_or_create(date=timezone.now().date())
         record.food_items.add(instance)
         record.update_total_calories()  
