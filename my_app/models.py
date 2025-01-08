@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils import timezone
 
 class Food(models.Model):
     name = models.CharField(max_length=100)
@@ -18,3 +21,11 @@ class DailyCalorieRecord(models.Model):
 
     def __str__(self):
         return f"Record for {self.date}"
+
+@receiver(post_save, sender=Food)
+def update_daily_record(sender, instance, created, **kwargs):
+    if created:
+        
+        record, _ = DailyCalorieRecord.objects.get_or_create(date=timezone.now().date())
+        record.food_items.add(instance)
+        record.update_total_calories()  

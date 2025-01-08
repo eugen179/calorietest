@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calorie Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-
-<div class="container mx-auto p-6">
-    <header class="mb-6">
-        <h1 class="text-3xl font-bold">Calorie Tracker</h1>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4 shadow-lg">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold text-center">Calorie Tracker</h1>
+        </div>
     </header>
-
-    <main>
+    <main class="container mx-auto mt-8">
         {% block content %}
         {% endblock %}
     </main>
-</div>
-
+    <footer class="bg-gray-800 text-white py-4 mt-10">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Calorie Tracker. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="mb-4">
-    <h2 class="text-xl font-semibold">Food Items</h2>
-    <ul>
-        {% for food in foods %}
-        <li class="flex justify-between p-2 border-b">
-            {{ food.name }} - {{ food.calorie_count }} kcal
-            <a href="{% url 'remove_food' food.id %}" class="text-red-500">Remove</a>
-        </li>
-        {% endfor %}
-    </ul>
+<div class="p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Today's Calorie Tracker</h2>
+    <div class="flex justify-between items-center mb-6">
+        <p class="text-lg font-bold">Total Calories: <span class="text-blue-600">{{ total_calories }}</span></p>
+        <a href="{% url 'add_food' %}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Food</a>
+        <form method="post" action="{% url 'reset_calories' %}" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Reset Calories</button>
+        </form>
+    </div>
+    <table class="min-w-full bg-white">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="py-2 px-4 border-b">Food Name</th>
+                <th class="py-2 px-4 border-b">Calories</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for food in foods %}
+            <tr>
+                <td class="py-2 px-4 border-b">{{ food.name }}</td>
+                <td class="py-2 px-4 border-b">{{ food.calorie_count }}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'remove_food' food.id %}" class="text-red-600 hover:underline">Remove</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center py-4">No food items added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-
-<div class="mb-4">
-    <p>Total Calories: {{ total_calories }} kcal</p>
-    <a href="{% url 'reset_calories' %}" class="text-blue-500">Reset Calories</a>
-</div>
-
-<a href="{% url 'add_food' %}" class="bg-blue-500 text-white p-2 rounded">Add Food</a>
 {% endblock %}
