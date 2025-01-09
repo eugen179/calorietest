@@ -2,21 +2,19 @@
 
 {% block content %}
 <div class="p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Today's Calorie Tracker</h2>
+    <h2 class="text-xl font-semibold mb-4">my calorie tracker</h2>
     <div class="flex justify-between items-center mb-6">
         <p class="text-lg font-bold">Total Calories: <span class="text-blue-600">{{ total_calories }}</span></p>
         <a href="{% url 'add_food' %}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add Food</a>
         <form method="post" action="{% url 'reset_calories' %}" class="inline">
             {% csrf_token %}
-            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Reset Calories</button>
         </form>
     </div>
     <table class="min-w-full bg-white">
         <thead class="bg-gray-100">
             <tr>
                 <th class="py-2 px-4 border-b">Food Name</th>
-                <th class="py-2 px-4 border-b">Calories</th>
-                <th class="py-2 px-4 border-b">Actions</th>
+                
             </tr>
         </thead>
         <tbody>
